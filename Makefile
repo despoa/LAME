@@ -184,9 +184,18 @@ endif
 ##########################################################################
 # SGI
 ##########################################################################
-ifeq ($(UNAME),IRIX64) 
-   CC = cc	
+ifeq ($(UNAME),IRIX64) || ($(UNAME),IRIX))
+   CC = cc
+   CC_OPTS = -O3 -woff all 
+
+#optonal:
+#   GTK = -DHAVEGTK `gtk-config --cflags`
+#   GTKLIBS = `gtk-config --libs`
+#   BRHIST_SWITCH = -DBRHIST
+#   LIBTERMCAP = -lncurses
+
 endif
+
 
 
 ##########################################################################
