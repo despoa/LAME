@@ -53,6 +53,8 @@ int main(int argc, char **argv)
    * skip this call and set the values of interest in the gf struct.
    * (see lame.h for documentation about these parameters)
    */
+  gf.ogg=1;
+
   lame_parse_args(&gf,argc, argv);
 
 
