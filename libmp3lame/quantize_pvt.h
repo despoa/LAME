@@ -69,7 +69,7 @@ void    reduce_side (int targ_bits[2], FLOAT8 ms_ener_ratio, int mean_bits,
 
 
 int     bin_search_StepSize (lame_internal_flags * const gfc, gr_info * const cod_info,
-                             const int desired_rate, const int start,
+                             const int desired_rate, const int ch,
                              const FLOAT8 xrpow[576]);
 
 void    iteration_init (lame_global_flags *gfp);

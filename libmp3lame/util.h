@@ -394,7 +394,7 @@ struct lame_internal_flags {
 
   /* variables used by quantize.c */
   int OldValue[2];
-  int CurrentStep;
+  int CurrentStep[2];
 
   FLOAT8 masking_lower;
   char bv_scf[576];
