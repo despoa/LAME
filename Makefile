@@ -113,8 +113,8 @@ ifeq ($(UNAME),Linux)
 #   LIBSNDFILE=-lsndfile 
 
 # uncomment to compile in Vorbis support
-   VORBIS = -DHAVEVORBIS -I/home/mt/mp3/vorbis/include
-   VORBIS_LIB = -L/home/mt/mp3/vorbis/lib -lvorbis
+#   VORBIS = -DHAVEVORBIS -I/home/mt/mp3/vorbis/include
+#   VORBIS_LIB = -L/home/mt/mp3/vorbis/lib -lvorbis
 
 
 # suggested for gcc-2.7.x
@@ -165,14 +165,16 @@ else
 CC = ccc
 
 ################################################################
-#### set CC_OPTS = -arch <model> -O4 -fast -Wall
-####   i get the model out of /proc/cpuinfo with the following
-####   command: cat /proc/cpuinfo | grep "cpu model" | gawk '{print 
-tolower($4)}'
+#### set 'CC_OPTS = -arch host -tune host' to generate/tune instructions for 
+this machine
+####     'CC_OPTS += -migrate -fast -inline speed -unroll 0' tweak to run as 
+fast as possible :)
+####     'CC_OPTS += -w0 -Wall' set warning and linking flags
 ################################################################
-# Options for Compaq's C Compiler
-CC_OPTS = -arch $(shell cat /proc/cpuinfo | grep "cpu model" | gawk '{print 
-tolower($$4)}') -O4 -fast -Wall
+CC_OPTS = -arch host -tune host
+CC_OPTS += -migrate -fast -inline speed -unroll 0
+CC_OPTS += -w0 -Wall
+
 
 ################################################################
 #### to debug, uncomment
@@ -206,6 +208,19 @@ ifeq ($(UNAME),FreeBSD)
 #  remove if you do not have GTK or do not want the GTK frame analyzer
    GTK = -DHAVEGTK `gtk12-config --cflags`
    GTKLIBS = `gtk12-config --libs` 
+# Comment out next 2 lines if you want to remove VBR histogram capability
+   BRHIST_SWITCH = -DBRHIST
+   LIBTERMCAP = -lncurses
+
+endif
+
+##########################################################################
+# FreeBSD
+##########################################################################
+ifeq ($(UNAME),OpenBSD)
+#  remove if you do not have GTK or do not want the GTK frame analyzer
+#   GTK = -DHAVEGTK `gtk12-config --cflags`
+#   GTKLIBS = `gtk12-config --libs` 
 # Comment out next 2 lines if you want to remove VBR histogram capability
    BRHIST_SWITCH = -DBRHIST
    LIBTERMCAP = -lncurses
