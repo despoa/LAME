@@ -1,4 +1,4 @@
-$Id: DEFINES,v 1.21.2.3 2003-09-23 18:29:05 takehiro Exp $
+$Id: DEFINES,v 1.21.2.4 2003-10-21 16:31:27 takehiro Exp $
 
 TAKEHIRO_IEEE754_HACK:
  - use hacky and fast code with IEEE754 float format.
@@ -6,7 +6,3 @@ TAKEHIRO_IEEE754_HACK:
 USE_FAST_LOG:
  - use of log/log10 approximation (uses IEEE754 float format)
    (absolute precision of log10 is then around 1e-6)
-
-NEW_DRAIN (theres a define above: NEW_DRAINXX):
- - use new ancillary data filling algorithm which minimize main_data_begin
-
