@@ -133,8 +133,8 @@ ifeq ($(UNAME),Linux)
 #   LIBSNDFILE=-lsndfile 
 
 # uncomment to compile in Vorbis support
-#   VORBIS = -DHAVEVORBIS -I/home/mt/mp3/vorbis/include
-#   VORBIS_LIB = -L/home/mt/mp3/vorbis/lib -lvorbis
+   VORBIS = -DHAVEVORBIS -I/home/mt/mp3/vorbis/include
+   VORBIS_LIB = -L/home/mt/mp3/vorbis/lib -lvorbis
 
 
 # suggested for gcc-2.7.x
@@ -142,14 +142,14 @@ ifeq ($(UNAME),Linux)
 #  CC_OPTS =  -O9 -fomit-frame-pointer -fno-strength-reduce -mpentiumpro -ffast-math -finline-functions -funroll-loops -Wall -malign-double -g -march=pentiumpro -mfancy-math-387 -pipe 
 
 #  for debugging:
-#  CC_OPTS =  -UNDEBUG -O -Wall -ggdb -DABORTFP
+   CC_OPTS =  -UNDEBUG -O -Wall -ggdb -DABORTFP
 
 #  for lots of debugging:
 #   CC_OPTS =  -DDEBUG -UNDEBUG  -O -Wall -g -DABORTFP 
 
 
-#  some alternate code (work in progress Robert.Hegemann@gmx.de)
-#  CPP_OPTS += -DRH_AMP -DRH_VALIDATE_MS
+#  special noise calculation
+#  CPP_OPTS += -DRH_AMP
 # these options for gcc-2.95.2 to produce fast code
 #   CC_OPTS = \
 #	-Wall -O9 -fomit-frame-pointer -march=pentium \
