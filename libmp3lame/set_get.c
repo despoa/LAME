@@ -591,6 +591,26 @@ lame_get_error_protection( const lame_global_flags*  gfp )
 }
 
 
+/*
+ * padding_type.
+ *  PAD_NO     = pad no frames
+ *  PAD_ALL    = pad all frames
+ *  PAD_ADJUST = adjust padding
+ */
+int
+lame_set_padding_type( lame_global_flags*  gfp,
+                       Padding_type        padding_type )
+{
+    return 0;
+}
+
+Padding_type
+lame_get_padding_type( const lame_global_flags*  gfp )
+{
+    return PAD_ADJUST;
+}
+
+
 /* MP3 'private extension' bit. Meaningless. */
 int
 lame_set_extension( lame_global_flags*  gfp,
