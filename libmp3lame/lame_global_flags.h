@@ -119,7 +119,6 @@ struct lame_global_struct {
   float athaa_sensitivity;        /* dB, tune active region of auto-level */
   int cwlimit;                    /* predictability limit                 */
   short_block_t short_blocks;
-  int mixed_blocks;
 /*  int allow_diff_short;            allow blocktypes to differ between
                                      channels?                            */
   int useTemporal;                /* use temporal masking effect          */
