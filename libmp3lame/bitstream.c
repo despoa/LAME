@@ -316,7 +316,7 @@ encodeSideInfo2(lame_global_flags *gfp,int bitsPerFrame)
 	for (gr = 0; gr < 2; gr++) {
 	    for (ch = 0; ch < gfc->channels_out; ch++) {
 		gr_info *gi = &l3_side->tt[gr][ch];
-		writeheader(gfc,gi->part2_3_length,       12);
+		writeheader(gfc,gi->part2_3_length+gi->part2_length, 12);
 		writeheader(gfc,gi->big_values / 2,        9);
 		writeheader(gfc,gi->global_gain,           8);
 		writeheader(gfc,gi->scalefac_compress,     4);
@@ -367,7 +367,7 @@ encodeSideInfo2(lame_global_flags *gfp,int bitsPerFrame)
 	gr = 0;
 	for (ch = 0; ch < gfc->channels_out; ch++) {
 	    gr_info *gi = &l3_side->tt[gr][ch];
-	    writeheader(gfc,gi->part2_3_length,       12);
+	    writeheader(gfc,gi->part2_3_length+gi->part2_length, 12);
 	    writeheader(gfc,gi->big_values / 2,        9);
 	    writeheader(gfc,gi->global_gain,           8);
 	    writeheader(gfc,gi->scalefac_compress,     9);
@@ -693,7 +693,7 @@ writeMainData ( lame_global_flags * const gfp)
 		DEBUGF(gfc,"<%ld> ", gfc->bs.totbit-hogege);
 #endif
 		/* does bitcount in quantize.c agree with actual bit count?*/
-		assert(data_bits==gi->part2_3_length-gi->part2_length);
+		assert(data_bits==gi->part2_3_length);
 		assert(scale_bits==gi->part2_length);
 		tot_bits += scale_bits + data_bits;
 
@@ -738,7 +738,7 @@ writeMainData ( lame_global_flags * const gfp)
 	    data_bits +=huffman_coder_count1(gfc, gi);
 
 	    /* does bitcount in quantize.c agree with actual bit count?*/
-	    assert(data_bits==gi->part2_3_length-gi->part2_length);
+	    assert(data_bits==gi->part2_3_length);
 	    assert(scale_bits==gi->part2_length);
 	    tot_bits += scale_bits + data_bits;
 	} /* for ch */
