@@ -113,8 +113,8 @@ ifeq ($(UNAME),Linux)
 #   LIBSNDFILE=-lsndfile 
 
 # uncomment to compile in Vorbis support
-#   VORBIS = -DHAVEVORBIS -I/home/mt/mp3/vorbis/include
-#   VORBIS_LIB = -L/home/mt/mp3/vorbis/lib -lvorbis
+   VORBIS = -DHAVEVORBIS -I/home/mt/mp3/vorbis/include
+   VORBIS_LIB = -L/home/mt/mp3/vorbis/lib -lvorbis
 
 
 # suggested for gcc-2.7.x
