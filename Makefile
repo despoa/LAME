@@ -30,12 +30,6 @@ RM = rm -f
 ##########################################################################
 CPP_OPTS = -DHAVEMPGLIB 
 
-##########################################################################
-# -DFLOAT8_is_float will FLOAT8 as float
-# -DFLOAT_is_float will FLOAT8 as float
-##########################################################################
-CPP_OPTS += -DFLOAT8_is_float
-
 
 
 
@@ -111,17 +105,16 @@ ifeq ($(UNAME),Linux)
 #   LIBSNDFILE=-lsndfile 
 
 # uncomment to compile in Vorbis support
-#   VORBIS = -DHAVEVORBIS -I/home/mt/mp3/vorbis/include
-#   VORBIS_LIB = -L/home/mt/mp3/vorbis/lib -lvorbis
+   VORBIS = -DHAVEVORBIS -I/home/mt/mp3/vorbis/include
+   VORBIS_LIB = -L/home/mt/mp3/vorbis/lib -lvorbis
 
 
 # suggested for gcc-2.7.x
-   CC_OPTS =  -O3 -fomit-frame-pointer -funroll-loops -ffast-math  -finline-functions -Wall
+#   CC_OPTS =  -O3 -fomit-frame-pointer -funroll-loops -ffast-math  -finline-functions -Wall
 #  CC_OPTS =  -O9 -fomit-frame-pointer -fno-strength-reduce -mpentiumpro -ffast-math -finline-functions -funroll-loops -Wall -malign-double -g -march=pentiumpro -mfancy-math-387 -pipe 
 
 #  for debugging:
-#   CC_OPTS =  -UNDEBUG -O -Wall -g -DABORTFP
-#   CC_OPTS =  -UNDEBUG -O -Wall -g 
+   CC_OPTS =  -UNDEBUG -O -Wall -g -DABORTFP
 
 #  for lots of debugging:
 #   CC_OPTS =  -DDEBUG -UNDEBUG  -O -Wall -g -DABORTFP 
@@ -192,8 +185,21 @@ endif
 # SGI
 ##########################################################################
 ifeq ($(UNAME),IRIX64) 
-   CC = cc	
+   CC = cc
+   CC_OPTS = -O3 -woff all 
+
+#optonal:
+#   GTK = -DHAVEGTK `gtk-config --cflags`
+#   GTKLIBS = `gtk-config --libs`
+#   BRHIST_SWITCH = -DBRHIST
+#   LIBTERMCAP = -lncurses
+
 endif
+ifeq ($(UNAME),IRIX) 
+   CC = cc
+   CC_OPTS = -O3 -woff all 
+endif
+
 
 
 ##########################################################################
@@ -315,13 +321,8 @@ ASFLAGS=-f elf -i i386/
 	gcc -c $< -o $@
 
 ## use MMX extension. you need nasm and MMX supported CPU.
-#CC_SWITCHES += -DMMX_choose_table
+#CC_SWITCCH += -DMMX_choose_table
 #OBJ += i386/choose_table.o
-
-## use SSE/3DNow! extension or FPU natie code.
-## you need nasm
-#CC_SWITCHES += -DASM_QUANTIZE
-#OBJ += i386/quantize.o
 
 %.o: %.c 
 	$(CC) $(CPP_OPTS) $(CC_SWITCHES) -c $< -o $@
