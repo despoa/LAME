@@ -26,7 +26,6 @@
 #define uint16_t UInt16
 #define uint32_t UInt32
 #define uint64_t unsigned long long
-#define ieee854_float80_t long double
 #define ieee754_float64_t double
 #define ieee754_float32_t float
 
