@@ -1,7 +1,7 @@
 #ifndef GTKANAL_DOT_H
 #define GTKANAL_DOT_H
-#include "globalflags.h"
 #include "encoder.h"
+#include "lame.h"
 
 #define READ_AHEAD 10             /* number of frames to read ahead */
 #define MAXMPGLAG READ_AHEAD      /* if the mpg123 lag becomes bigger than this 				     we have to stop */
