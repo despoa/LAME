@@ -14,8 +14,6 @@
 
 #define HAVE_ALLOCA 1
 
-#define HAVE_LONG_DOUBLE 1
-
 #define STDC_HEADERS 1
 
 #define TIME_WITH_SYS_TIME 1
