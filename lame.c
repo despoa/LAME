@@ -29,7 +29,6 @@
 #include "lame.h"
 #include "util.h"
 #include "timestatus.h"
-#include "globalflags.h"
 #include "psymodel.h"
 #include "newmdct.h"
 #include "quantize.h"
@@ -46,10 +45,6 @@
 #ifdef __riscos__
 #include "asmstuff.h"
 #endif
-
-/* Global flags substantiated here.  defined extern in globalflags.h */
-/* default values set in lame_init() */
-//lame_global_flags gf;
 
 
 /* Global variable definitions for lame.c */
@@ -802,6 +797,10 @@ int mf_size,char *mp3buf, int mp3buf_size)
   }
 
 
+  /*
+  VBR_iteration_loop_new( gfp,*pe_use, ms_ratio, xr, masking, &l3_side, l3_enc,
+  	  &scalefac);
+  */
 
 
   if (gfp->VBR) {
@@ -811,10 +810,7 @@ int mf_size,char *mp3buf, int mp3buf_size)
     iteration_loop( gfp,*pe_use, ms_ratio, xr, *masking, &l3_side, l3_enc,
 		    scalefac);
   }
-  /*
-  VBR_iteration_loop_new( gfp,*pe_use, ms_ratio, xr, masking, &l3_side, l3_enc,
-			  &scalefac);
-  */
+
 
 
 
@@ -1078,7 +1074,10 @@ int lame_encode_buffer_interleaved(lame_global_flags *gfp,
       buffer_l[i]=buffer[2*i];
       buffer_r[i]=buffer[2*i+1];
     }
-    return lame_encode_buffer(gfp,buffer_l,buffer_r,nsamples,mp3buf,mp3buf_size);
+    ret = lame_encode_buffer(gfp,buffer_l,buffer_r,nsamples,mp3buf,mp3buf_size);
+    free(buffer_l);
+    free(buffer_r);
+    return ret;
   }
 
 
