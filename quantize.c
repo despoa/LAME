@@ -186,6 +186,7 @@ iteration_loop( lame_global_flags *gfp,
       if (gfp->gtkflag)
 	set_pinfo (cod_info, &ratio[gr][ch], &scalefac[gr][ch], xr[gr][ch], xfsf, noise, gr, ch);
 #endif
+
 /*#define NORES_TEST */
 #ifndef NORES_TEST
       ResvAdjust(gfp,cod_info, l3_side, mean_bits );
@@ -656,7 +657,7 @@ int init_outer_loop(lame_global_flags *gfp,
   cod_info->sfb_partition_table = &nr_of_sfb_block[0][0][0];
 
   cod_info->part2_3_length    = 0;
-  cod_info->big_values        = ((cod_info->block_type==SHORT_TYPE)?288:0);
+  cod_info->big_values        = 0;
   cod_info->count1            = 0;
   cod_info->scalefac_compress = 0;
   cod_info->table_select[0]   = 0;
