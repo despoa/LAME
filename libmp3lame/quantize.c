@@ -329,6 +329,7 @@ trancate_smallspectrums(
     }
 
     sfb = j = 0;
+    sfb = 5;
     do {
 	FLOAT8 allowedNoise, trancateThreshold;
 	int nsame, start;
