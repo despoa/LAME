@@ -249,44 +249,22 @@ future:  Data indicates that the shape of the equal loudness curve varies
          However, the potential gain may not be enough to justify an effort.
 */
 static FLOAT
-psycho_loudness_approx( FLOAT *energy, lame_global_flags *gfp )
+psycho_loudness_approx( FLOAT *energy, lame_internal_flags *gfc )
 {
-  int i;
-  static int eql_type = -1;
-  static FLOAT eql_w[BLKSIZE/2];/* equal loudness weights (based on ATH) */
-  const FLOAT vo_scale= 1./( 14752 ); /* tuned for output level */
-				      /* (sensitive to energy scale) */
-  FLOAT loudness_power;
+    int i;
+    FLOAT loudness_power;
 
-  if( eql_type != gfp->ATHtype ) { 
-				/* compute equal loudness weights (eql_w) */
-    FLOAT freq;
-    FLOAT freq_inc = gfp->out_samplerate / (BLKSIZE);
-    FLOAT eql_balance = 0.0;
-    eql_type = gfp->ATHtype;
-    freq = 0.0;
-    for( i = 0; i < BLKSIZE/2; ++i ) {
-      freq += freq_inc;
-				/* convert ATH dB to relative power (not dB) */
-				/*  to determine eql_w */
-      eql_w[i] = 1. / pow( 10, ATHformula( freq, gfp ) / 10 );
-      eql_balance += eql_w[i];
-    }
-    eql_balance = 1 / eql_balance;
-    for( i = BLKSIZE/2; --i >= 0; ) { /* scale weights */
-      eql_w[i] *= eql_balance;
-    }
-  }
+/* tuned for output level (sensitive to energy scale) */
+#define vo_scale (1./( 14752 ))
 
-  loudness_power = 0.0;
-  for( i = 0; i < BLKSIZE/2; ++i ) { /* apply weights to power in freq. bands*/
-    loudness_power += NON_LINEAR_SCALE_ITEM(energy[i]) * eql_w[i];
-  }
-  loudness_power = NON_LINEAR_SCALE_SUM(loudness_power);
-  loudness_power /= (BLKSIZE/2);
-  loudness_power *= vo_scale * vo_scale;
+    loudness_power = 0.0;
+    /* apply weights to power in freq. bands*/
+    for( i = 0; i < BLKSIZE/2; ++i )
+	loudness_power += energy[i] * gfc->ATH->eql_w[i];
+    loudness_power = loudness_power;
+    loudness_power *= (vo_scale * vo_scale / (BLKSIZE/2));
 
-  return( loudness_power );
+    return loudness_power;
 }
 
 static void
@@ -369,7 +347,7 @@ compute_ffts(
     if (gfp->athaa_loudapprox == 2 && chn < 2) {/*no loudness for mid/side ch*/
 	gfc->loudness_sq[gr_out][chn] = gfc->loudness_sq_save[chn];
 	gfc->loudness_sq_save[chn]
-	    = psycho_loudness_approx(fftenergy, gfp);
+	    = psycho_loudness_approx(fftenergy, gfc);
     }
 }
 
@@ -2067,5 +2045,25 @@ int psymodel_init(lame_global_flags *gfp)
     gfc->bo_s[SBMAX_s-1]--;
     assert(gfc->bo_l[SBMAX_l-1] <= gfc->npart_l);
     assert(gfc->bo_s[SBMAX_s-1] <= gfc->npart_s);
+
+    if (gfp->ATHtype != -1) { 
+	/* compute equal loudness weights (eql_w) */
+	FLOAT freq;
+	FLOAT freq_inc = gfp->out_samplerate / (BLKSIZE);
+	FLOAT eql_balance = 0.0;
+	freq = 0.0;
+	for( i = 0; i < BLKSIZE/2; ++i ) {
+	    /* convert ATH dB to relative power (not dB) */
+	    /*  to determine eql_w */
+	    freq += freq_inc;
+	    gfc->ATH->eql_w[i] = 1. / pow( 10, ATHformula( freq, gfp ) / 10 );
+	    eql_balance += gfc->ATH->eql_w[i];
+	}
+	eql_balance = 1.0 / eql_balance;
+	for( i = BLKSIZE/2; --i >= 0; ) { /* scale weights */
+	    gfc->ATH->eql_w[i] *= eql_balance;
+	}
+    }
+
     return 0;
 }

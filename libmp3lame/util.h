@@ -218,6 +218,7 @@ typedef struct
     FLOAT8  l[SBMAX_l];     // ATH for sfbs in long blocks
     FLOAT8  s[SBMAX_s];     // ATH for sfbs in short blocks
     FLOAT8  cb[CBANDS];     // ATH for convolution bands
+    FLOAT eql_w[BLKSIZE/2];/* equal loudness weights (based on ATH) */
 } ATH_t;
 
 /**
