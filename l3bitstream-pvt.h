@@ -25,7 +25,7 @@ static int encodeSideInfo( III_side_info_t  *si );
 
 static void encodeMainData( int              l3_enc[2][2][576],
 			    III_side_info_t  *si,
-			    III_scalefac_t   scalefac[2][2] );
+			    III_scalefac_t   *scalefac );
 
 static void drain_into_ancillary_data( int lengthInBits );
 

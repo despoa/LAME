@@ -27,7 +27,7 @@ void III_format_bitstream( int              bitsPerFrame,
 			   frame_params     *in_fr_ps,
 			   int              l3_enc[2][2][576],
                            III_side_info_t  *l3_side,
-			   III_scalefac_t   scalefac[2][2],
+			   III_scalefac_t   *scalefac,
 			   Bit_stream_struc *in_bs);
 
 int HuffmanCode( int table_select, int x, int y, unsigned *code, unsigned int *extword, int *codebits, int *extbits );
