@@ -1,0 +1,14 @@
+/Makefile
+/mpglib.a
+/config.status
+/config.log
+/config.cache
+/*.d
+/Debug
+/DebugGTK
+/Release
+/ReleaseGTK
+/*.ncb
+/*.plg
+/*.opt
+/*.dll
