@@ -122,10 +122,6 @@ SOURCE=..\formatBitstream.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\globalflags.h
-# End Source File
-# Begin Source File
-
 SOURCE=..\huffman.h
 # End Source File
 # Begin Source File
