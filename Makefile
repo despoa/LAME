@@ -184,7 +184,7 @@ endif
 ##########################################################################
 # SGI
 ##########################################################################
-ifeq ($(UNAME),IRIX64) || ($(UNAME),IRIX))
+ifeq ($(UNAME),IRIX64) 
    CC = cc
    CC_OPTS = -O3 -woff all 
 
@@ -194,6 +194,10 @@ ifeq ($(UNAME),IRIX64) || ($(UNAME),IRIX))
 #   BRHIST_SWITCH = -DBRHIST
 #   LIBTERMCAP = -lncurses
 
+endif
+ifeq ($(UNAME),IRIX) 
+   CC = cc
+   CC_OPTS = -O3 -woff all 
 endif
 
 
