@@ -225,6 +225,11 @@ adjust_ATH( lame_global_flags* const  gfp,
  ***********************************************************************/
 
 #ifdef BRHIST
+/*2DO rh 20021015
+I thought BRHIST was only for the frontend, so that clients
+may use these stats, even if it's only a Windows DLL
+I'll extend the stats for block types used
+*/
 static void
 updateStats( lame_internal_flags * const gfc )
 {
@@ -486,7 +491,11 @@ int  lame_encode_mp3_frame (				// Output
 	  sum_pe_LR += pe[gr][ch];
 	}
       }
-
+/*2DO rh 20021015 
+change the following to
+      if (sum_pe_MS <= sum_pe_LR)
+	gfc->mode_ext = MPG_MD_MS_LR;
+*/
       /* based on PE: M/S coding would not use much more bits than L/R */
       if ((!gfc->nsPsy.use && sum_pe_MS <= 1.07 * sum_pe_LR)
 	  || (gfc->nsPsy.use && sum_pe_MS <= 1.00 * sum_pe_LR))
