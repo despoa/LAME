@@ -28,7 +28,14 @@ RM = rm -f
 ##########################################################################
 # -DHAVEMPGLIB compiles the mpglib *decoding* library into libmp3lame
 ##########################################################################
-CPP_OPTS = -DHAVEMPGLIB 
+CPP_OPTS += -DHAVEMPGLIB 
+
+##########################################################################
+# floating point option:
+# -DFLOAT8_is_float         most floating point variables are 4 byte
+# -DFLOAT8_is_double        most floating point variables are 8 byte (default)
+##########################################################################
+#CPP_OPTS += -DFLOAT8_is_double
 
 
 
