@@ -330,8 +330,10 @@ ASFLAGS=-f elf -i i386/
 %.d: %.c
 	$(SHELL) -ec '$(CC) $(MAKEDEP)  $(CPP_OPTS) $(CC_SWITCHES)  $< | sed '\''s;$*.o;& $@;g'\'' > $@'
 
+all: $(PGM)
+
 $(PGM):	main.o $(gtk_obj) libmp3lame.a 
-	$(CC) -o $(PGM)  main.o $(gtk_obj) -L. -lmp3lame $(LIBS) $(LIBSNDFILE) $(GTKLIBS) $(LIBTERMCAP) $(VORBIS_LIB)
+	$(CC) $(CC_OPTS) -o $(PGM)  main.o $(gtk_obj) -L. -lmp3lame $(LIBS) $(LIBSNDFILE) $(GTKLIBS) $(LIBTERMCAP) $(VORBIS_LIB)
 
 mp3x:	mp3x.o $(gtk_obj) libmp3lame.a
 	$(CC) -o mp3x mp3x.o $(gtk_obj) $(OBJ) $(LIBS) $(LIBSNDFILE) $(GTKLIBS) $(LIBTERMCAP) $(VORBIS_LIB)
