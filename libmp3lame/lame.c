@@ -836,17 +836,16 @@ lame_init_params(lame_global_flags * const gfp)
 #if defined(HAVE_GTK)
     if (gfp->analysis)
         gfp->bWriteVbrTag = 0;
-#endif
 
     /* some file options not allowed if output is: not specified or stdout */
     if (gfc->pinfo != NULL)
         gfp->bWriteVbrTag = 0; /* disable Xing VBR tag */
+#endif
 
     init_bit_stream_w(gfc);
 
-    j =
-        gfc->samplerate_index + (3 * gfp->version) + 6 * (gfp->out_samplerate <
-                                                          16000);
+    j = gfc->samplerate_index
+	+ (3 * gfp->version) + 6 * (gfp->out_samplerate < 16000);
     for (i = 0; i < SBMAX_l + 1; i++)
         gfc->scalefac_band.l[i] = sfBandIndex[j].l[i];
     for (i = 0; i < SBMAX_s + 1; i++)
