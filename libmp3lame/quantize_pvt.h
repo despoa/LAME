@@ -123,3 +123,4 @@ void    huffman_init (lame_internal_flags * const gfc);
 #define LARGE_BITS 100000
 
 #endif /* LAME_QUANTIZE_PVT_H */
+

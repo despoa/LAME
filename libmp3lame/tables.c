@@ -510,3 +510,4 @@ const unsigned  header_word [3] = { 0xFFF00000, 0xFFF80000, 0xFFE00000 };
 const int scfsi_band[5] = { 0, 6, 11, 16, 21 };
 
 /* end of tables.c */
+

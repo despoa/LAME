@@ -37,3 +37,4 @@ int compute_flushbits(const lame_global_flags *gfp, int *nbytes);
 
 
 #endif
+

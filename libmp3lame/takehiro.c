@@ -608,7 +608,7 @@ int count_bits(
 
     if (gfc->substep_shaping & 2) {
 	int sfb, j = 0;
-	// 0.634521682242439 = 0.5946*2**(.5*0.1875)
+	/* 0.634521682242439 = 0.5946*2**(.5*0.1875) */
 	const FLOAT8 roundfac =
 	    0.634521682242439 / IPOW20(gi->global_gain+gi->scalefac_scale);
 	for (sfb = 0; sfb < gi->sfbmax; sfb++) {
@@ -872,7 +872,7 @@ void best_scalefac_store(
 	    if (gi->l3_enc[l+j]!=0)
 		break;
 	if (l==0)
-	    gi->scalefac[sfb] = recalc = -2; // anything goes.
+	    gi->scalefac[sfb] = recalc = -2; /* anything goes. */
     }
 
     if (!gi->scalefac_scale && !gi->preflag) {
@@ -1173,3 +1173,4 @@ void huffman_init(lame_internal_flags * const gfc)
 	gfc->bv_scf[i-1] = index;
     }
 }
+

@@ -136,7 +136,7 @@ bitrate is more balanced according to the -V value.*/
   if (f < -.3)
       f=3410;
 
-  f /= 1000;  // convert to khz
+  f /= 1000;  /* convert to khz */
   f  = Max(0.01, f);
   f  = Min(18.0, f);
 
@@ -304,7 +304,7 @@ S.D. Stearns and R.A. David, Prentice-Hall, 1992
 
 int gcd ( int i, int j )
 {
-//    assert ( i > 0  &&  j > 0 );
+/*    assert ( i > 0  &&  j > 0 ); */
     return j ? gcd(j, i % j) : i;
 }
 
@@ -765,3 +765,4 @@ void init_log_table(void)
 #endif
 
 /* end of util.c */
+

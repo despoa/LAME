@@ -264,8 +264,8 @@ void init_fft(lame_internal_flags * const gfc)
 {
     int i;
 
-    // The type of window used here will make no real difference, but
-    // in the interest of merging nspsytune stuff - switch to blackman window
+    /* The type of window used here will make no real difference, but */
+    /* in the interest of merging nspsytune stuff - switch to blackman window */
     for (i = 0; i < BLKSIZE ; i++)
       /* blackman window */
       window[i] = 0.42-0.5*cos(2*PI*(i+.5)/BLKSIZE)+
@@ -294,3 +294,4 @@ void init_fft(lame_internal_flags * const gfc)
 #endif
         gfc->fft_fht = fht;
 }
+

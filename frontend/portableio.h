@@ -49,6 +49,9 @@
  * $Id$
  *
  * $Log$
+ * Revision 1.2  2000/11/18 04:24:06  markt
+ * Removed ieeefloat.*
+ *
  * Revision 1.1  2000/09/28 16:36:53  takehiro
  * moved frontend staffs into frontend/
  * Need to debug vorbis/mpglib/analyzer/bitrate histgram.
@@ -113,3 +116,4 @@ extern CLINK void WriteIeeeExtendedHighLow(FILE *fp, double num);
 #define	Read32BitsLowHigh(f)	Read32Bits(f)
 #define WriteString(f,s)	fwrite(s,strlen(s),sizeof(char),f)
 #endif
+

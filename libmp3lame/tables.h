@@ -91,3 +91,4 @@ extern const unsigned int   table56       [4*4];
 extern const int scfsi_band[5];
 
 #endif /* LAME_TABLES_H */
+
