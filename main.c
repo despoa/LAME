@@ -54,8 +54,9 @@ int main(int argc, char **argv)
    * (see lame.h for documentation about these parameters)
    */
   gf.ogg=1;
-
   lame_parse_args(&gf,argc, argv);
+  if (gf.decode_only)
+    gf.ogg=0;
 
 
 
