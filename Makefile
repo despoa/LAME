@@ -142,6 +142,13 @@ ifeq ($(UNAME),Linux)
 # LINUX on Digital/Compaq Alpha CPUs
 ##########################################################################
 ifeq ($(ARCH),alpha)
+
+################################################################
+#### Check if 'ccc' is in our path
+####   if not, use 'gcc'
+################################################################
+ifeq ($(shell which ccc 2>/dev/null | grep -c ccc),0)
+
 # double is faster than float on Alpha
 CC_OPTS =       -O4 -Wall -fomit-frame-pointer -ffast-math -funroll-loops \
                 -mfp-regs -fschedule-insns -fschedule-insns2 \
@@ -149,19 +156,46 @@ CC_OPTS =       -O4 -Wall -fomit-frame-pointer -ffast-math -funroll-loops \
 #                -DFLOAT=double
 # add "-mcpu=21164a -Wa,-m21164a" to optimize for 21164a (ev56) CPU
 
+################################################################
+#### else, use 'ccc'
+################################################################
+else
+
 # Compaq's C Compiler
-#CC = ccc
+CC = ccc
+
+################################################################
+#### set CC_OPTS = -arch <model> -O4 -fast -Wall
+####   i get the model out of /proc/cpuinfo with the following
+####   command: cat /proc/cpuinfo | grep "cpu model" | gawk '{print 
+tolower($4)}'
+################################################################
 # Options for Compaq's C Compiler
-#CC_OPTS = -fast -Wall
+CC_OPTS = -arch $(shell cat /proc/cpuinfo | grep "cpu model" | gawk '{print 
+tolower($$4)}') -O4 -fast -Wall
+
+################################################################
+#### to debug, uncomment
+################################################################
+# For Debugging
+#CC_OPTS += -g3
+
+################################################################
+#### define __DECALPHA__ (i was getting re-declaration warnings
+####   in machine.h
+################################################################
+# Define DEC Alpha
+CPP_OPTS += -D__DECALPHA__
 
 # standard Linux libm
-#LIBS	=	-lm  
+#LIBS	=	-lm
 # optimized libffm (free fast math library)
-#LIBS	=	-lffm  
+#LIBS	=	-lffm
 # Compaq's fast math library
-LIBS    =       -lcpml 
-endif
-endif
+LIBS    =       -lcpml
+endif  #  gcc or ccc?
+endif  #  alpha 
+endif  #  linux
 
 
 
