@@ -235,7 +235,7 @@ encodeMainData( lame_global_flags *gfp,
 	    int sfb_partition;
 	    assert( gi->sfb_partition_table );
 
-	    if ( (gi->window_switching_flag == 1) && (gi->block_type == SHORT_TYPE) )
+	    if (gi->block_type == SHORT_TYPE)
 	    {
 #ifdef ALLOW_MIXED
 		if ( gi->mixed_block_flag )
@@ -503,7 +503,7 @@ Huffmancodebits( BF_PartHolder **pph, int *ix, gr_info *gi )
     bigvalues = gi->big_values * 2;
     if ( bigvalues )
     {
-	if ( !(gi->mixed_block_flag) && gi->window_switching_flag && (gi->block_type == SHORT_TYPE) )
+	if ( !(gi->mixed_block_flag) && (gi->block_type == SHORT_TYPE) )
 	{ /* Three short blocks */
 	    /*
 	      Within each scalefactor band, data is given for successive
@@ -630,6 +630,7 @@ Huffmancodebits( BF_PartHolder **pph, int *ix, gr_info *gi )
 		    /* get huffman code */
 		    x = ix[i];
 		    y = ix[i + 1];
+
 		    if ( tableindex )
 		    {
 			bits = HuffmanCode( tableindex, x, y, &code, &ext, &cbits, &xbits );
@@ -647,7 +648,9 @@ Huffmancodebits( BF_PartHolder **pph, int *ix, gr_info *gi )
     /* 2: Write count1 area */
     assert( (gi->count1table_select < 2) );
     count1End = bigvalues + (gi->count1 * 4);
+
     assert( count1End <= 576 );
+
     for ( i = bigvalues; i < count1End; i += 4 )
     {
 	v = ix[i];
@@ -712,7 +715,8 @@ L3_huffman_coder_count1( BF_PartHolder **pph, struct huffcodetab *h, int v, int 
     huffbits = h->table[p];
     len = h->hlen[ p ];
     *pph = BF_addEntry(*pph, huffbits, len);
-    totalBits += len;
+    totalBits= 0;
+#if 0
     if ( v )
     {
 	*pph = BF_addEntry( *pph,  signv, 1 );
@@ -734,7 +738,32 @@ L3_huffman_coder_count1( BF_PartHolder **pph, struct huffcodetab *h, int v, int 
 	*pph = BF_addEntry( *pph,  signy, 1 );
 	totalBits += 1;
     }
-    return totalBits;
+#endif   
+
+    p=0;
+    if ( v ) {
+	p = signv;
+	++totalBits;
+    }
+
+    if ( w ){
+	p = 2*p + signw;
+	++totalBits;
+    }
+
+    if ( x ) {
+	p = 2*p + signx;
+	++totalBits;
+    }
+
+    if ( y ) {
+	p = 2*p + signy;
+	++totalBits;
+    }
+
+    *pph = BF_addEntry(*pph, p, totalBits);
+
+    return totalBits+len;  
 }
 
 /*
@@ -757,11 +786,11 @@ HuffmanCode( int table_select, int x, int y, unsigned int *code, unsigned int *e
     signx = abs_and_sign( &x );
     signy = abs_and_sign( &y );
     h = &(ht[table_select]);
-    linbits = h->xlen;
-    linbitsx = linbitsy = 0;
 
     if ( table_select > 15 )
     { /* ESC-table is used */
+      linbits = h->xlen;
+      linbitsx = linbitsy = 0;
 	if ( x > 14 )
 	{
 	    linbitsx = x - 15;
@@ -776,7 +805,7 @@ HuffmanCode( int table_select, int x, int y, unsigned int *code, unsigned int *e
 	}
 	idx = x * 16 + y;
 	*code = h->table[idx];
-	*cbits = h->hlen[ idx ];
+        *cbits = h->hlen[ idx ];
 	if ( x > 14 )
 	{
 	    *ext |= linbitsx;
@@ -816,7 +845,7 @@ HuffmanCode( int table_select, int x, int y, unsigned int *code, unsigned int *e
 	{
 	    *code <<= 1;
 	    *code |= signy;
-	    *cbits += 1;
+            *cbits += 1;
 	}
     }
     assert( *cbits <= 32 );
