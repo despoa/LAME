@@ -176,7 +176,7 @@ ResvFrameBegin(lame_global_flags *gfp, int *mean_bits)
          extra_bits:  amount extra available from reservoir
   Mark Taylor 4/99
 */
-void ResvMaxBits(lame_global_flags *gfp, int mean_bits, int *targ_bits, int *extra_bits, int gr)
+void ResvMaxBits(lame_global_flags *gfp, int mean_bits, int *targ_bits, int *extra_bits, int cbr)
 {
   lame_internal_flags *gfc=gfp->internal_flags;
   int add_bits;
@@ -188,7 +188,7 @@ void ResvMaxBits(lame_global_flags *gfp, int mean_bits, int *targ_bits, int *ext
 #undef  NORES_TEST
 #ifndef NORES_TEST
   /* conpensate the saved bits used in the 1st granule */
-  if (gr == 1)
+  if (cbr)
       ResvSize += mean_bits;
 #endif
 
