@@ -88,7 +88,7 @@ void L3psycho_anal( lame_global_flags *gfp,
    */
   FLOAT (*wsamp_l)[BLKSIZE];
   FLOAT (*wsamp_s)[3][BLKSIZE_s];
-  FLOAT tot_ener[4]={0,0,0,0};
+  FLOAT tot_ener[4];
   static FLOAT wsamp_L[2][BLKSIZE];
   static FLOAT energy[HBLKSIZE];
   static FLOAT wsamp_S[2][3][BLKSIZE_s];
