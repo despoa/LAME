@@ -4,6 +4,7 @@
 /config.log
 /config.cache
 /*.d
+/*.lo
 /Debug
 /DebugGTK
 /Release
