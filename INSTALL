@@ -6,10 +6,13 @@ Building the MPEG audio encoding software on Windows:
 There are MSVC project files, and a Makefile.MSVC included
 with the project.  For production use, be sure to compile
 a "release" version and compile with the "maximum speed" compile
-option.  Note that MSVC "professional" claims to produce
-faster executables then MSVC "standard".  It is possible
-to compile the GTK frame analyzer under windows, see
-README.WINGTK
+option, and #define NDEBUG.   
+
+Note that MSVC "professional" claims to produce faster executables
+then MSVC "standard".  It is possible to compile the GTK frame
+analyzer under windows, see README.WINGTK
+
+
 
 
 
