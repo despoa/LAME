@@ -43,7 +43,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /YX /FD /c
-# ADD CPP /nologo /Zp2 /MT /W3 /GX /Ox /Ot /Og /Ob2 /I "..\\" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_BLADEDLL" /YX /FD /c
+# ADD CPP /nologo /Zp2 /MT /W3 /GX /Ox /Ot /Og /Ob2 /I "..\\" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /YX /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
 # ADD BASE RSC /l 0x409 /d "NDEBUG"
@@ -90,6 +90,14 @@ LINK32=link.exe
 # Name "MP3EncDll - Win32 Debug"
 # Begin Source File
 
+SOURCE=..\bitstream.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\bitstream.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\BladeMP3EncDLL.c
 # End Source File
 # Begin Source File
@@ -99,6 +107,18 @@ SOURCE=.\BladeMP3EncDLL.def
 # Begin Source File
 
 SOURCE=.\BladeMP3EncDLL.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\brhist.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\brhist.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\encoder.c
 # End Source File
 # Begin Source File
 
@@ -114,14 +134,6 @@ SOURCE=..\fft.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\formatBitstream.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\formatBitstream.h
-# End Source File
-# Begin Source File
-
 SOURCE=..\huffman.h
 # End Source File
 # Begin Source File
@@ -134,18 +146,6 @@ SOURCE=..\id3tag.h
 # End Source File
 # Begin Source File
 
-SOURCE="..\l3bitstream-pvt.h"
-# End Source File
-# Begin Source File
-
-SOURCE=..\l3bitstream.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\l3bitstream.h
-# End Source File
-# Begin Source File
-
 SOURCE=..\l3side.h
 # End Source File
 # Begin Source File
@@ -155,6 +155,14 @@ SOURCE=..\lame.c
 # Begin Source File
 
 SOURCE=..\lame.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\lametime.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\lametime.h
 # End Source File
 # Begin Source File
 
@@ -178,19 +186,19 @@ SOURCE=..\psymodel.h
 # End Source File
 # Begin Source File
 
-SOURCE="..\quantize-pvt.c"
-# End Source File
-# Begin Source File
-
-SOURCE="..\quantize-pvt.h"
-# End Source File
-# Begin Source File
-
 SOURCE=..\quantize.c
 # End Source File
 # Begin Source File
 
 SOURCE=..\quantize.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\quantize_pvt.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\quantize_pvt.h
 # End Source File
 # Begin Source File
 
@@ -231,6 +239,10 @@ SOURCE=..\util.c
 # Begin Source File
 
 SOURCE=..\util.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\vbrquantize.c
 # End Source File
 # Begin Source File
 
