@@ -2,7 +2,7 @@
 /*
  * set/get functions for lame_global_flags
  *
- * Copyright (c) 2001 Alexander Leidinger
+ * Copyright (c) 2001-2005 Alexander Leidinger
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
