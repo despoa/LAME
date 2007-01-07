@@ -20,5 +20,8 @@
 /*.plg
 /*.opt
 /*.dll
+/*.pch
 /*.new.mp3
 /*.wav.mp3
+/obj
+/output
