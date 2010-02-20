@@ -1,7 +1,0 @@
-## $Id$
-
-# global section for every Makefile.am
-
-AUTOMAKE_OPTIONS = 1.9 foreign $(top_srcdir)/ansi2knr
-
-# end global section
